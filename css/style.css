@@ -60,6 +60,13 @@ html {
     background: palegoldenrod;
 }
 
+.quarterCircleTopLeft:hover,
+.quarterCircleTopRight:hover,
+.quarterCircleBottomLeft:hover,
+.quarterCircleBottomRight:hover {
+    cursor: pointer;
+}
+
 .quarterCircleTopLeft {
     border-top-width: 16px;
     border-left-width: 16px;
@@ -136,7 +143,7 @@ html {
 
 .count {
     font-family: 'VT323', monospace;
-    color: #DC0D65;
+    color: #DC0D29;
     padding: 0px;
     font-size: 2em;
     width: 50px;
