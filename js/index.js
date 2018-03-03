@@ -1,9 +1,28 @@
+"use strict";
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-console.log(getRandomInt(3));
-// expected output: 0, 1 or 2
+let sliderClass = document.querySelector('.slider');
 
-console.log(getRandomInt(5));
-// expected output: 0, 1, 2, 3, 4
+// computerClass.className += " border";
+// document.querySelector('.x').className += " border";
+
+function hasClass(element, cls) {
+    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+}
+
+let selector = '.slider';
+let slider_toggle = document.querySelector(selector);
+slider_toggle.addEventListener('mousedown', toggle);
+
+let toggled = false;
+
+function toggle() {
+    if (!toggled) {
+        toggled = true;
+    } else {
+        toggled = false;
+    }
+}
