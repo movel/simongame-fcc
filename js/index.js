@@ -6,9 +6,6 @@ function getRandomInt(max) {
 
 let sliderClass = document.querySelector('.slider');
 
-// computerClass.className += " border";
-// document.querySelector('.x').className += " border";
-
 function hasClass(element, cls) {
     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 }
@@ -17,12 +14,29 @@ let selector = '.slider';
 let slider_toggle = document.querySelector(selector);
 slider_toggle.addEventListener('mousedown', toggle);
 
+let start = document.getElementById('start');
+
 let toggled = false;
+
+function addStartGameListener() {
+    start.addEventListener('mousedown', startGame);
+}
+
+function removeStartGameListener() {
+    start.removeEventListener('mousedown', startGame);
+}
+
+function startGame() {
+    console.log('Game is Starting!!!');
+}
 
 function toggle() {
     if (!toggled) {
         toggled = true;
+        addStartGameListener();
     } else {
         toggled = false;
+        removeStartGameListener();
     }
+
 }
