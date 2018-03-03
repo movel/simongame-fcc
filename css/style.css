@@ -220,28 +220,54 @@ html {
     position: relative;
 }
 
-.sw-slot {
-    height: 20px;
-    width: 40px;
-    background-color: #222;
-    position: relative;
-    top: 4px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
 .switch {
-    height: 19px;
-    width: 16px;
-    top: 0px;
-    border-radius: 4px;
-    background-color: #3193DE;
+    height: 20px;
+    width: 38px;
+    top: 4px;
+    background-color: var(--blue);
     position: relative;
-    border: 1px solid #333;
 }
 
-.sw-on {
-    left: 20px;
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--blue);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: var(--blue);
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px var(--blue);
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
 }
 
 .rw.bot {
