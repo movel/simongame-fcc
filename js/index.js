@@ -13,10 +13,16 @@ function getRandomArray(length) {
     return rndArray;
 }
 
-let sliderClass = document.querySelector('.slider');
-
 function hasClass(element, cls) {
     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+}
+
+var x = document.getElementById("myAudio");
+console.log(x);
+
+
+function playAudio() {
+    x.play();
 }
 
 let selector = '.slider';
@@ -37,7 +43,7 @@ function removeStartGameListener() {
 
 function startGame() {
     // console.log('Game is Starting!!!');
-
+    playAudio();
 }
 
 function toggle() {
