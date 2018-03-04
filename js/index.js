@@ -4,6 +4,15 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
+function getRandomArray(length) {
+    let rndArray = new Array(length);
+    for (let i = 0; i < length; i++) {
+        rndArray[i] = getRandomInt(length);
+    }
+
+    return rndArray;
+}
+
 let sliderClass = document.querySelector('.slider');
 
 function hasClass(element, cls) {
@@ -27,7 +36,7 @@ function removeStartGameListener() {
 }
 
 function startGame() {
-    console.log('Game is Starting!!!');
+    // console.log('Game is Starting!!!');
 }
 
 function toggle() {
