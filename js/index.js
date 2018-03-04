@@ -37,15 +37,25 @@ function removeStartGameListener() {
 
 function startGame() {
     // console.log('Game is Starting!!!');
+
 }
 
 function toggle() {
     if (!toggled) {
         toggled = true;
+        toggleLed(true);
         addStartGameListener();
     } else {
         toggled = false;
+        toggleLed(false);
         removeStartGameListener();
     }
 
+}
+
+function toggleLed(on) {
+    let countClass = document.getElementsByClassName('count');
+    let cls = "led-off";
+    if (on) countClass[0].classList.remove(cls);
+    else countClass[0].classList.add(cls);
 }
