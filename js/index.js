@@ -1,5 +1,16 @@
 "use strict";
 
+let sound1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+let sound2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+let sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+let sound4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+
+let sounds = new Array(4);
+sounds[0] = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+sounds[1] = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+sounds[2] = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+sounds[3] = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
@@ -17,11 +28,12 @@ function hasClass(element, cls) {
     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 }
 
-var x = document.getElementsByClassName('sound1');
-console.log(x);
+// let x = document.getElementsByClassName('sound1');
+// console.log(x);
 
 function playAudio() {
-    x.play();
+    sounds[0].play();
+    // console.log(sound1);
 }
 
 let selector = '.slider';
