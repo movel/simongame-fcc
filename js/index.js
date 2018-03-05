@@ -1,46 +1,55 @@
 "use strict";
 
-window.onload = function() {
-    let selector = '.slider';
-    let slider_toggle = document.querySelector(selector);
-    slider_toggle.addEventListener('mousedown', toggle);
+window.addEventListener('mousedown', playAudio);
 
-    let start = document.getElementById('start');
+let selector = '.slider';
+let slider_toggle = document.querySelector(selector);
+slider_toggle.addEventListener('mousedown', toggle);
 
-    let toggled = false;
+let start = document.getElementById('start');
 
-    function addStartGameListener() {
-        start.addEventListener('mousedown', startGame);
+let toggled = false;
+
+let id0 = document.getElementById('0');
+id0.addEventListener('mousedown', play0);
+
+function play0() {
+    let x = document.getElementsByClassName('sound1')[0];
+    x.play();
+}
+
+function addStartGameListener() {
+    start.addEventListener('mousedown', startGame);
+}
+
+function removeStartGameListener() {
+    start.removeEventListener('mousedown', startGame);
+}
+
+function startGame() {
+    // Game is Starting!!!
+    playAudio();
+}
+
+function toggle() {
+    if (!toggled) {
+        toggled = true;
+        toggleLed(true);
+        addStartGameListener();
+    } else {
+        toggled = false;
+        toggleLed(false);
+        removeStartGameListener();
     }
+}
 
-    function removeStartGameListener() {
-        start.removeEventListener('mousedown', startGame);
-    }
+function toggleLed(on) {
+    let countClass = document.getElementsByClassName('count');
+    let cls = "led-off";
+    if (on) countClass[0].classList.remove(cls);
+    else countClass[0].classList.add(cls);
+}
 
-    function startGame() {
-        // Game is Starting!!!
-        playAudio();
-    }
-
-    function toggle() {
-        if (!toggled) {
-            toggled = true;
-            toggleLed(true);
-            addStartGameListener();
-        } else {
-            toggled = false;
-            toggleLed(false);
-            removeStartGameListener();
-        }
-    }
-
-    function toggleLed(on) {
-        let countClass = document.getElementsByClassName('count');
-        let cls = "led-off";
-        if (on) countClass[0].classList.remove(cls);
-        else countClass[0].classList.add(cls);
-    }
-};
 
 // let sound1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
 // let sound2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
