@@ -17,9 +17,8 @@ function hasClass(element, cls) {
     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 }
 
-var x = document.getElementById("myAudio");
+var x = document.getElementsByClassName('sound1');
 console.log(x);
-
 
 function playAudio() {
     x.play();
