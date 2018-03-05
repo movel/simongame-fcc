@@ -1,6 +1,6 @@
 "use strict";
 
-window.addEventListener('mousedown', playAudio);
+// window.addEventListener('mousedown', playAudio);
 
 let selector = '.slider';
 let slider_toggle = document.querySelector(selector);
@@ -10,12 +10,41 @@ let start = document.getElementById('start');
 
 let toggled = false;
 
-let id0 = document.getElementById('0');
-id0.addEventListener('mousedown', play0);
-
-function play0() {
-    let x = document.getElementsByClassName('sound1')[0];
+function playAudio(e) {
+    let sound = "sound" + (e + 1);
+    let x = document.getElementsByClassName('sound')[0];
     x.play();
+}
+
+function buttonAddListener() {
+    let id0 = document.getElementById('0');
+    id0.addEventListener('mousedown', playSnd1);
+    let id1 = document.getElementById('1');
+    id1.addEventListener('mousedown', playSnd2);
+    let id2 = document.getElementById('2');
+    id2.addEventListener('mousedown', playSnd3);
+    let id3 = document.getElementById('3');
+    id3.addEventListener('mousedown', playSnd4);
+}
+
+function playSnd1() {
+    let snd1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+    snd1.play();
+}
+
+function playSnd2() {
+    let snd2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+    snd2.play();
+}
+
+function playSnd3() {
+    let snd3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+    snd3.play();
+}
+
+function playSnd4() {
+    let snd4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+    snd4.play();
 }
 
 function addStartGameListener() {
@@ -28,7 +57,8 @@ function removeStartGameListener() {
 
 function startGame() {
     // Game is Starting!!!
-    playAudio();
+    buttonAddListener();
+    // playAudio();
 }
 
 function toggle() {
@@ -79,9 +109,9 @@ function hasClass(element, cls) {
     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 }
 
-let x = document.getElementsByClassName('sound1')[0];
+// let x = document.getElementsByClassName('sound1')[0];
 
-function playAudio() {
-    x.currentTime = 0;
-    x.play();
-}
+// function playAudio() {
+//     x.currentTime = 0;
+//     x.play();
+// }
