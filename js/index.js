@@ -60,16 +60,23 @@ function playSnd4() {
     snd4.play();
 }
 
+
+
 function playSnd(index) {
     let snd1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
     let snd2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
     let snd3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
     let snd4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
 
-    if (index === 1) snd1.play();
-    if (index === 2) snd2.play();
-    if (index === 3) snd3.play();
-    if (index === 4) snd4.play();
+    let snd = new Audio();
+
+    if (index === 1) snd = snd1;
+    if (index === 2) snd = snd2;
+    if (index === 3) snd = snd3;
+    if (index === 4) snd = snd4;
+
+    snd.play();
+
 }
 
 function getRndSnd(length) {
