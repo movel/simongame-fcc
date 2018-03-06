@@ -2,6 +2,19 @@
 
 // window.addEventListener('mousedown', playAudio);
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomArray(length) {
+    let rndArray = new Array(length);
+    for (let i = 0; i < length; i++) {
+        rndArray[i] = getRandomInt(4);
+    }
+
+    return rndArray;
+}
+
 let selector = '.slider';
 let slider_toggle = document.querySelector(selector);
 slider_toggle.addEventListener('mousedown', toggle);
@@ -47,6 +60,28 @@ function playSnd4() {
     snd4.play();
 }
 
+function playSnd(index) {
+    let snd1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+    let snd2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+    let snd3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+    let snd4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+
+    if (index === 1) snd1.play();
+    if (index === 2) snd2.play();
+    if (index === 3) snd3.play();
+    if (index === 4) snd4.play();
+}
+
+function getRndSnd(length) {
+    // let length = 7;
+    let arr = getRandomArray(length);
+    for (let i = 0; i < length; i++) {
+        playSnd(i);
+    }
+
+    console.log(arr);
+}
+
 function addStartGameListener() {
     start.addEventListener('mousedown', startGame);
 }
@@ -58,6 +93,7 @@ function removeStartGameListener() {
 function startGame() {
     // Game is Starting!!!
     buttonAddListener();
+    getRndSnd(3);
     // playAudio();
 }
 
@@ -80,38 +116,6 @@ function toggleLed(on) {
     else countClass[0].classList.add(cls);
 }
 
-
-// let sound1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
-// let sound2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
-// let sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
-// let sound4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
-
-// let sounds = new Array(4);
-// sounds[0] = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
-// sounds[1] = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
-// sounds[2] = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
-// sounds[3] = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
-
-function getRandomArray(length) {
-    let rndArray = new Array(length);
-    for (let i = 0; i < length; i++) {
-        rndArray[i] = getRandomInt(length);
-    }
-
-    return rndArray;
-}
-
 function hasClass(element, cls) {
     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 }
-
-// let x = document.getElementsByClassName('sound1')[0];
-
-// function playAudio() {
-//     x.currentTime = 0;
-//     x.play();
-// }
