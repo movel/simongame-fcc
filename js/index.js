@@ -67,6 +67,7 @@ function playSnd(index) {
     if (index === 3) snd = snd3;
     if (index === 4) snd = snd4;
 
+    snd.addEventListener('ended', getNextAudio);
     snd.play();
 }
 
@@ -81,19 +82,17 @@ function playAudio() {
 }
 
 function getNextAudio() {
-
     if (cnt <= count) {
-        setTimeout(playSnd(arrAudio[cnt]), 1000);
         cnt++;
     }
 }
 
 function getRndSnd(length) {
-    // let length = 7;
-    let arr = getRandomArray(length);
+    let arrAudio = getRandomArray(length);
     for (let i = 0; i < length; i++) {
-        let timerId = setTimeout(playSnd(i + 1), 3000);
-    }
+
+    };
+    setTimeout(playSnd(1), 1000);
 }
 
 function addStartGameListener() {
@@ -107,7 +106,7 @@ function removeStartGameListener() {
 function startGame() {
     // Game is Starting!!!
     buttonAddListener();
-    getRndSnd(4);
+    // getRndSnd(4);
     playAudio();
 }
 
