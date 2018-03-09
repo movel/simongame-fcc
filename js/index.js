@@ -23,12 +23,6 @@ let start = document.getElementById('start');
 
 let toggled = false;
 
-function playAudio(e) {
-    let sound = "sound" + (e + 1);
-    let x = document.getElementsByClassName('sound')[0];
-    x.play();
-}
-
 function buttonAddListener() {
     let id0 = document.getElementById('0');
     id0.addEventListener('mousedown', playSnd1);
@@ -60,8 +54,6 @@ function playSnd4() {
     snd4.play();
 }
 
-
-
 function playSnd(index) {
     let snd1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
     let snd2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
@@ -76,17 +68,32 @@ function playSnd(index) {
     if (index === 4) snd = snd4;
 
     snd.play();
+}
 
+let arrAudio;
+let cnt = 0;
+let count = 4;
+
+function playAudio() {
+    arrAudio = getRandomArray(count);
+    let _player = new Audio();
+    _player.addEventListener('ended', getNextAudio);
+}
+
+function getNextAudio() {
+
+    if (cnt <= count) {
+        setTimeout(playSnd(arrAudio[cnt]), 1000);
+        cnt++;
+    }
 }
 
 function getRndSnd(length) {
     // let length = 7;
     let arr = getRandomArray(length);
     for (let i = 0; i < length; i++) {
-        playSnd(i);
+        let timerId = setTimeout(playSnd(i + 1), 3000);
     }
-
-    console.log(arr);
 }
 
 function addStartGameListener() {
@@ -100,8 +107,8 @@ function removeStartGameListener() {
 function startGame() {
     // Game is Starting!!!
     buttonAddListener();
-    getRndSnd(3);
-    // playAudio();
+    getRndSnd(4);
+    playAudio();
 }
 
 function toggle() {
