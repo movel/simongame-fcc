@@ -28,17 +28,18 @@ let cnt = 1;
 let count = 4;
 let snd = new Array();
 
-snd.push(new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'));
-snd.push(new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'));
-snd.push(new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'));
-snd.push(new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'));
+let snd1 = document.querySelector('audio_1');
+let snd2 = document.querySelector('audio_2');
+let snd3 = document.querySelector('audio_3');
+let snd4 = document.querySelector('audio_4');
+
 
 let so = snd[0];
-let timer = setTimeout(loadSong(snd[0]), 3000);
+let timer = setTimeout(loadSong, 3000);
 
-function loadSong(sound) {
-    let audio = new Audio(sound);
-    audio.play();
+function loadSong() {
+    let snd1 = new Audio(document.querySelector('audio_1'));
+    snd1.play();
 }
 
 function buttonAddListener() {
