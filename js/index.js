@@ -28,19 +28,22 @@ let cnt = 1;
 let count = 4;
 let snd = new Array();
 
-let snd1 = document.querySelector('audio_1');
-let snd2 = document.querySelector('audio_2');
-let snd3 = document.querySelector('audio_3');
-let snd4 = document.querySelector('audio_4');
+let snd1 = document.querySelector('.audio_1');
+let snd2 = document.querySelector('.audio_2');
+let snd3 = document.querySelector('.audio_3');
+let snd4 = document.querySelector('.audio_4');
+
+snd.push(snd1);
+snd.push(snd2);
+snd.push(snd3);
+snd.push(snd4);
 
 
-let so = snd[0];
-let timer = setTimeout(loadSong, 3000);
-
-function loadSong() {
-    let snd1 = new Audio(document.querySelector('audio_1'));
-    snd1.play();
+function loadSong(index) {
+    snd[index].play();
 }
+
+let timer = setTimeout(() => loadSong(2), 3000);
 
 function buttonAddListener() {
     let id0 = document.getElementById('0');
