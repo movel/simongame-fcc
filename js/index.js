@@ -23,6 +23,24 @@ let start = document.getElementById('start');
 
 let toggled = false;
 
+let arrAudio;
+let cnt = 1;
+let count = 4;
+let snd = new Array();
+
+snd.push(new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'));
+snd.push(new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'));
+snd.push(new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'));
+snd.push(new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'));
+
+let so = snd[0];
+let timer = setTimeout(loadSong(snd[0]), 3000);
+
+function loadSong(sound) {
+    let audio = new Audio(sound);
+    audio.play();
+}
+
 function buttonAddListener() {
     let id0 = document.getElementById('0');
     id0.addEventListener('mousedown', playSnd1);
@@ -36,44 +54,31 @@ function buttonAddListener() {
 
 function playSnd1() {
     let snd1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
-    snd1.play();
+    snd.add(snd1);
+    playSnd(snd[0]);
 }
 
 function playSnd2() {
     let snd2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
-    snd2.play();
+    playSnd(snd2);
 }
 
 function playSnd3() {
     let snd3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
-    snd3.play();
+    playSnd(snd3);
 }
 
 function playSnd4() {
     let snd4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
-    snd4.play();
+    playSnd(snd4);
 }
 
-function playSnd(index) {
-    let snd1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
-    let snd2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
-    let snd3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
-    let snd4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
-
-    let snd = new Audio();
-
-    if (index === 1) snd = snd1;
-    if (index === 2) snd = snd2;
-    if (index === 3) snd = snd3;
-    if (index === 4) snd = snd4;
-
-    snd.addEventListener('ended', getNextAudio);
+function playSnd(index_snd) {
+    let snd = new Audio(index_snd);
     snd.play();
+    snd.addEventListener("ended", console.log("ended"));
+    console.log('arrAudio(): ' + arrAudio);
 }
-
-let arrAudio;
-let cnt = 0;
-let count = 4;
 
 function playAudio() {
     arrAudio = getRandomArray(count);
@@ -84,15 +89,14 @@ function playAudio() {
 function getNextAudio() {
     if (cnt <= count) {
         cnt++;
-    }
+    };
+    console.log('arrAudio(): ' + arrAudio);
+    playSnd(arrAudio[cnt]);
 }
 
 function getRndSnd(length) {
-    let arrAudio = getRandomArray(length);
-    for (let i = 0; i < length; i++) {
-
-    };
-    setTimeout(playSnd(1), 1000);
+    arrAudio = getRandomArray(length);
+    let timer = setTimeout(playSnd(1), 1000);
 }
 
 function addStartGameListener() {
@@ -106,7 +110,7 @@ function removeStartGameListener() {
 function startGame() {
     // Game is Starting!!!
     buttonAddListener();
-    // getRndSnd(4);
+    getRndSnd(4);
     playAudio();
 }
 
