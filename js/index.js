@@ -50,22 +50,17 @@ function getNextAudio(cnt) {
 }
 
 function loadSong(index) {
-    // console.log('loadSong index: ' + index)
     snd[index].load();
     snd[index].play();
-    snd[index].addEventListener('ended', getNextAudio(index), false);
-}
-
-function loadSongOnClick(index) {
-    snd[index].load();
-    snd[index].play();
+    // if needs delay()
+    if (arguments[1] !== true) snd[index].addEventListener('ended', getNextAudio(index), false);
 }
 
 function buttonAddListener() {
-    id0.addEventListener('mousedown', () => loadSongOnClick(0));
-    id1.addEventListener('mousedown', () => loadSongOnClick(1));
-    id2.addEventListener('mousedown', () => loadSongOnClick(2));
-    id3.addEventListener('mousedown', () => loadSongOnClick(3));
+    id0.addEventListener('mousedown', () => loadSong(0, true));
+    id1.addEventListener('mousedown', () => loadSong(1, true));
+    id2.addEventListener('mousedown', () => loadSong(2, true));
+    id3.addEventListener('mousedown', () => loadSong(3, true));
 }
 
 function playAudio() {
