@@ -38,19 +38,19 @@ snd.push(snd2);
 snd.push(snd3);
 snd.push(snd4);
 
-let timer = setTimeout(() => loadSong(0), 1000);
+// let timer = setTimeout(() => loadSong(cnt), 1000);
 
 function getNextAudio(cnt) {
-    if (cnt <= count) {
+    if (cnt < count - 1) {
+        let t = setTimeout(() => loadSong(cnt), 1000);
         cnt++;
     };
-    console.log('cnt: ' + cnt);
-    let t = setTimeout(() => loadSong(cnt), 1000);
 }
 
 function loadSong(index) {
+    console.log('loadSong index: ' + index)
     snd[index].play();
-    snd[1].addEventListener('ended', getNextAudio(index), false);
+    snd[index].addEventListener('ended', getNextAudio(index), false);
 }
 
 function buttonAddListener() {
@@ -113,9 +113,10 @@ function removeStartGameListener() {
 
 function startGame() {
     // Game is Starting!!!
-    buttonAddListener();
-    getRndSnd(4);
-    playAudio();
+    loadSong(cnt);
+    // buttonAddListener();
+    // getRndSnd(4);
+    // playAudio();
 }
 
 function toggle() {
