@@ -88,11 +88,6 @@ function buttonAddListener() {
     id1.addEventListener('mousedown', () => loadSong(1, true));
     id2.addEventListener('mousedown', () => loadSong(2, true));
     id3.addEventListener('mousedown', () => loadSong(3, true));
-
-    //     id0.addEventListener('mouseup', () => resetLightBkgColor(0));
-    //     id1.addEventListener('mouseup', () => resetLightBkgColor(1));
-    //     id2.addEventListener('mouseup', () => resetLightBkgColor(2));
-    //     id3.addEventListener('mouseup', () => resetLightBkgColor(3));
 }
 
 function playAudio() {
