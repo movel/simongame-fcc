@@ -83,36 +83,16 @@ function setLightBkgColor(index) {
     setTimeout(() => idClass[0].classList.remove(cls), 500);
 }
 
-function resetLightBkgColor(index) {
-    let cls = "light";
-    if (index === 0) {
-        let idClass = document.getElementsByClassName('quarterCircleTopLeft');
-        idClass[0].classList.remove(cls);
-    }
-    if (index === 1) {
-        let idClass = document.getElementsByClassName('quarterCircleTopRight');
-        idClass[0].classList.remove(cls);
-    }
-    if (index === 2) {
-        let idClass = document.getElementsByClassName('quarterCircleBottomRight');
-        idClass[0].classList.remove(cls);
-    }
-    if (index === 3) {
-        let idClass = document.getElementsByClassName('quarterCircleBottomLeft');
-        idClass[0].classList.remove(cls);
-    }
-}
-
 function buttonAddListener() {
     id0.addEventListener('mousedown', () => loadSong(0, true));
     id1.addEventListener('mousedown', () => loadSong(1, true));
     id2.addEventListener('mousedown', () => loadSong(2, true));
     id3.addEventListener('mousedown', () => loadSong(3, true));
 
-    id0.addEventListener('mouseup', () => resetLightBkgColor(0));
-    id1.addEventListener('mouseup', () => resetLightBkgColor(1));
-    id2.addEventListener('mouseup', () => resetLightBkgColor(2));
-    id3.addEventListener('mouseup', () => resetLightBkgColor(3));
+    //     id0.addEventListener('mouseup', () => resetLightBkgColor(0));
+    //     id1.addEventListener('mouseup', () => resetLightBkgColor(1));
+    //     id2.addEventListener('mouseup', () => resetLightBkgColor(2));
+    //     id3.addEventListener('mouseup', () => resetLightBkgColor(3));
 }
 
 function playAudio() {
