@@ -50,51 +50,22 @@ function getNextAudio(cnt) {
 }
 
 function loadSong(index) {
-    console.log('loadSong index: ' + index)
+    // console.log('loadSong index: ' + index)
     snd[index].load();
     snd[index].play();
     snd[index].addEventListener('ended', getNextAudio(index), false);
 }
 
+function loadSongOnClick(index) {
+    snd[index].load();
+    snd[index].play();
+}
+
 function buttonAddListener() {
-    let id0 = document.getElementById('0');
-    id0.addEventListener('mousedown', playSnd1);
-    let id1 = document.getElementById('1');
-    id1.addEventListener('mousedown', playSnd2);
-    let id2 = document.getElementById('2');
-    id2.addEventListener('mousedown', playSnd3);
-    let id3 = document.getElementById('3');
-    id3.addEventListener('mousedown', playSnd4);
-}
-
-function playSnd1() {
-    // let snd1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
-    snd1.load();
-    snd1.play();
-}
-
-function playSnd2() {
-    // let snd2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
-    snd2.load();
-    snd2.play();
-}
-
-function playSnd3() {
-    // let snd3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
-    snd3.load();
-    snd3.play();
-}
-
-function playSnd4() {
-    // let snd4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
-    snd4.load();
-    snd4.play();
-}
-
-function playSnd(index_snd) {
-    let snd = new Audio(index_snd);
-    snd.play();
-    console.log('arrAudio(): ' + snd);
+    id0.addEventListener('mousedown', () => loadSongOnClick(0));
+    id1.addEventListener('mousedown', () => loadSongOnClick(1));
+    id2.addEventListener('mousedown', () => loadSongOnClick(2));
+    id3.addEventListener('mousedown', () => loadSongOnClick(3));
 }
 
 function playAudio() {
