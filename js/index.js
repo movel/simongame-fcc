@@ -24,7 +24,7 @@ let start = document.getElementById('start');
 let toggled = false;
 
 let arrAudio;
-let cnt = 1;
+let cnt = 0;
 let count = 4;
 let snd = new Array();
 
@@ -38,12 +38,20 @@ snd.push(snd2);
 snd.push(snd3);
 snd.push(snd4);
 
+let timer = setTimeout(() => loadSong(0), 1000);
+
+function getNextAudio(cnt) {
+    if (cnt <= count) {
+        cnt++;
+    };
+    console.log('cnt: ' + cnt);
+    let t = setTimeout(() => loadSong(cnt), 1000);
+}
 
 function loadSong(index) {
     snd[index].play();
+    snd[1].addEventListener('ended', getNextAudio(index), false);
 }
-
-let timer = setTimeout(() => loadSong(2), 3000);
 
 function buttonAddListener() {
     let id0 = document.getElementById('0');
@@ -88,14 +96,6 @@ function playAudio() {
     arrAudio = getRandomArray(count);
     let _player = new Audio();
     _player.addEventListener('ended', getNextAudio);
-}
-
-function getNextAudio() {
-    if (cnt <= count) {
-        cnt++;
-    };
-    console.log('arrAudio(): ' + arrAudio);
-    playSnd(arrAudio[cnt]);
 }
 
 function getRndSnd(length) {
