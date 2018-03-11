@@ -44,7 +44,10 @@ snd.push(snd4);
 
 function getNextAudio(cnt) {
     if (cnt < count - 1) {
-        setTimeout(() => loadSong(cnt), 1000);
+        setTimeout(() => {
+            setLightBkgColor(cnt);
+            loadSong(cnt);
+        }, 1000);
         cnt++;
     };
 }
@@ -52,8 +55,52 @@ function getNextAudio(cnt) {
 function loadSong(index) {
     snd[index].load();
     snd[index].play();
-    // if needs delay()
-    if (arguments[1] !== true) snd[index].addEventListener('ended', getNextAudio(index), false);
+    setLightBkgColor(index);
+    console.log('index: ' + index);
+    // if needs delay
+    if (arguments[1] !== true) {
+        setLightBkgColor(index);
+        snd[index].addEventListener('ended', getNextAudio(index), false);
+    };
+}
+
+function setLightBkgColor(index) {
+    let cls = "light";
+    let idClass;
+    if (index === 0) {
+        idClass = document.getElementsByClassName('quarterCircleTopLeft');
+    }
+    if (index === 1) {
+        idClass = document.getElementsByClassName('quarterCircleTopRight');
+    }
+    if (index === 2) {
+        idClass = document.getElementsByClassName('quarterCircleBottomRight');
+    }
+    if (index === 3) {
+        idClass = document.getElementsByClassName('quarterCircleBottomLeft');
+    }
+    idClass[0].classList.add(cls);
+    setTimeout(() => idClass[0].classList.remove(cls), 500);
+}
+
+function resetLightBkgColor(index) {
+    let cls = "light";
+    if (index === 0) {
+        let idClass = document.getElementsByClassName('quarterCircleTopLeft');
+        idClass[0].classList.remove(cls);
+    }
+    if (index === 1) {
+        let idClass = document.getElementsByClassName('quarterCircleTopRight');
+        idClass[0].classList.remove(cls);
+    }
+    if (index === 2) {
+        let idClass = document.getElementsByClassName('quarterCircleBottomRight');
+        idClass[0].classList.remove(cls);
+    }
+    if (index === 3) {
+        let idClass = document.getElementsByClassName('quarterCircleBottomLeft');
+        idClass[0].classList.remove(cls);
+    }
 }
 
 function buttonAddListener() {
@@ -61,6 +108,11 @@ function buttonAddListener() {
     id1.addEventListener('mousedown', () => loadSong(1, true));
     id2.addEventListener('mousedown', () => loadSong(2, true));
     id3.addEventListener('mousedown', () => loadSong(3, true));
+
+    id0.addEventListener('mouseup', () => resetLightBkgColor(0));
+    id1.addEventListener('mouseup', () => resetLightBkgColor(1));
+    id2.addEventListener('mouseup', () => resetLightBkgColor(2));
+    id3.addEventListener('mouseup', () => resetLightBkgColor(3));
 }
 
 function playAudio() {

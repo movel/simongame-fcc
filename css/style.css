@@ -2,7 +2,7 @@
 :root {
     --blue_light: #605999;
     --focus_bckg: #AEC965;
-    --yellow: #FFFC19;
+    --yellow: #fed93f;
     --red: #FF0000;
     --blue: #1485CC;
     --green: #23B209;
@@ -279,7 +279,7 @@ input:checked+.slider:before {
 }
 
 .yellow.light {
-    background-color: #fed93f;
+    background-color: #FFFC19;
 }
 
 .blue.light {
@@ -287,7 +287,7 @@ input:checked+.slider:before {
 }
 
 .red.light {
-    background-color: #ff4c4c;
+    background-color: #fc5757;
 }
 
 .green.light {
