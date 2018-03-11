@@ -21,9 +21,13 @@ slider_toggle.addEventListener('mousedown', toggle);
 
 let start = document.getElementById('start');
 
+let id0 = document.getElementById('0');
+let id1 = document.getElementById('1');
+let id2 = document.getElementById('2');
+let id3 = document.getElementById('3');
+
 let toggled = false;
 
-let arrAudio;
 let cnt = 0;
 let count = 4;
 let snd = new Array();
@@ -38,17 +42,16 @@ snd.push(snd2);
 snd.push(snd3);
 snd.push(snd4);
 
-// let timer = setTimeout(() => loadSong(cnt), 1000);
-
 function getNextAudio(cnt) {
     if (cnt < count - 1) {
-        let t = setTimeout(() => loadSong(cnt), 1000);
+        setTimeout(() => loadSong(cnt), 1000);
         cnt++;
     };
 }
 
 function loadSong(index) {
     console.log('loadSong index: ' + index)
+    snd[index].load();
     snd[index].play();
     snd[index].addEventListener('ended', getNextAudio(index), false);
 }
@@ -65,31 +68,33 @@ function buttonAddListener() {
 }
 
 function playSnd1() {
-    let snd1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
-    snd.add(snd1);
-    playSnd(snd[0]);
+    // let snd1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+    snd1.load();
+    snd1.play();
 }
 
 function playSnd2() {
-    let snd2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
-    playSnd(snd2);
+    // let snd2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+    snd2.load();
+    snd2.play();
 }
 
 function playSnd3() {
-    let snd3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
-    playSnd(snd3);
+    // let snd3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+    snd3.load();
+    snd3.play();
 }
 
 function playSnd4() {
-    let snd4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
-    playSnd(snd4);
+    // let snd4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+    snd4.load();
+    snd4.play();
 }
 
 function playSnd(index_snd) {
     let snd = new Audio(index_snd);
     snd.play();
-    snd.addEventListener("ended", console.log("ended"));
-    console.log('arrAudio(): ' + arrAudio);
+    console.log('arrAudio(): ' + snd);
 }
 
 function playAudio() {
@@ -114,7 +119,7 @@ function removeStartGameListener() {
 function startGame() {
     // Game is Starting!!!
     loadSong(cnt);
-    // buttonAddListener();
+    buttonAddListener();
     // getRndSnd(4);
     // playAudio();
 }
