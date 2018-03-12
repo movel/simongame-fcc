@@ -97,8 +97,7 @@ function playAudio() {
 }
 
 function getRndSnd(length) {
-    arrAudio = getRandomArray(length);
-    let timer = setTimeout(playSnd(1), 1000);
+    getRandomArray(length);
 }
 
 function addStartGameListener() {
@@ -111,10 +110,14 @@ function removeStartGameListener() {
 
 function startGame() {
     // Game is Starting!!!
-    loadSong(cnt);
     buttonAddListener();
-    // getRndSnd(4);
-    // playAudio();
+    let gameOver = false;
+    count = 1;
+
+    let gameArr = getRandomArray(count);
+    console.log(gameArr);
+    loadSong(gameArr[0]);
+
 }
 
 function toggle() {
