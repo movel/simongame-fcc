@@ -29,7 +29,7 @@ let id3 = document.getElementById('3');
 let toggled = false;
 
 let cnt = 0;
-let count = 4;
+let count = 0;
 let snd = new Array();
 
 let snd1 = document.querySelector('.audio_1');
@@ -112,11 +112,14 @@ function startGame() {
     // Game is Starting!!!
     buttonAddListener();
     let gameOver = false;
-    count = 1;
+    count++;
 
     let gameArr = getRandomArray(count);
     console.log(gameArr);
-    loadSong(gameArr[0]);
+    for (let i = 0; i < gameArr.length; i++) {
+        loadSong(gameArr[i]);
+    }
+
 
 }
 
