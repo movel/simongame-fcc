@@ -21,6 +21,8 @@ slider_toggle.addEventListener('mousedown', toggle);
 
 let start = document.getElementById('start');
 
+let gameArr = new Array();
+
 let id0 = document.getElementById('0');
 let id1 = document.getElementById('1');
 let id2 = document.getElementById('2');
@@ -45,22 +47,23 @@ snd.push(snd4);
 function getNextAudio(cnt) {
     if (cnt < count - 1) {
         setTimeout(() => {
-            setLightBkgColor(cnt);
-            loadSong(cnt);
+            setLightBkgColor(gameArr[cnt]);
+            loadSong(gameArr[cnt]);
         }, 1000);
         cnt++;
     };
 }
 
 function loadSong(index) {
-    snd[index].load();
-    snd[index].play();
-    setLightBkgColor(index);
-    console.log('index: ' + index);
+    console.log('loadSong - snd[gameArr[index]]' + snd[gameArr[index]]);
+    snd[gameArr[index]].load();
+    snd[gameArr[index]].play();
+    setLightBkgColor(gameArr[index]);
+    console.log('index: ' + gameArr[index]);
     // if needs delay
     if (arguments[1] !== true) {
-        setLightBkgColor(index);
-        snd[index].addEventListener('ended', getNextAudio(index), false);
+        setLightBkgColor(gameArr[index]);
+        snd[gameArr[index]].addEventListener('ended', getNextAudio(gameArr[index]), false);
     };
 }
 
@@ -114,7 +117,7 @@ function startGame() {
     let gameOver = false;
     count++;
 
-    let gameArr = getRandomArray(count);
+    gameArr = getRandomArray(count);
     console.log(gameArr);
     for (let i = 0; i < gameArr.length; i++) {
         loadSong(gameArr[i]);
