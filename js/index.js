@@ -63,6 +63,7 @@ function loadSong(index) {
     console.log('index: ' + gameArr[index]);
     // if needs delay
     if (arguments[1] !== true) {
+        console.log('loadSong - argumetnts[1]: ' + gameArr[index]);
         setLightBkgColor(gameArr[index]);
         snd[gameArr[index]].addEventListener('ended', getNextAudio(gameArr[index]), false);
     };
