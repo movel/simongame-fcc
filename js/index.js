@@ -47,15 +47,16 @@ snd.push(snd4);
 function getNextAudio(cnt) {
     if (cnt < count - 1) {
         setTimeout(() => {
-            setLightBkgColor(gameArr[cnt]);
-            loadSong(gameArr[cnt]);
+            setLightBkgColor(snd[gameArr[cnt]]);
+            loadSong(snd[gameArr[cnt]]);
         }, 1000);
         cnt++;
     };
 }
 
 function loadSong(index) {
-    console.log('loadSong - snd[gameArr[index]]' + snd[gameArr[index]]);
+    console.log('loadSong - snd[gameArr[index]]: ' + snd[gameArr[index]]);
+    console.log('loadSong - gameArr[index]: ' + gameArr[index] + ' index: ' + index);
     snd[gameArr[index]].load();
     snd[gameArr[index]].play();
     setLightBkgColor(gameArr[index]);
@@ -82,6 +83,7 @@ function setLightBkgColor(index) {
     if (index === 3) {
         idClass = document.getElementsByClassName('quarterCircleBottomLeft');
     }
+    console.log('setLightBkgColor - index: ' + index);
     idClass[0].classList.add(cls);
     setTimeout(() => idClass[0].classList.remove(cls), 500);
 }
@@ -118,11 +120,9 @@ function startGame() {
     count++;
 
     gameArr = getRandomArray(count);
-    console.log(gameArr);
-    for (let i = 0; i < gameArr.length; i++) {
-        loadSong(gameArr[i]);
-    }
+    console.log('startGame - gameArr() ' + gameArr);
 
+    loadSong(0);
 
 }
 
