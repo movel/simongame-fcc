@@ -106,6 +106,7 @@ function addStartGameListener() {
 
 function removeStartGameListener() {
     start.removeEventListener('mousedown', startGame);
+    count = 0;
 }
 
 function startGame() {
@@ -114,6 +115,9 @@ function startGame() {
     let gameOver = false;
     count++;
 
+    let countCls = document.querySelector('.count');
+    if (count < 10) countCls.innerHTML = '0' + count;
+    else countCls.innerHTML = '' + count;
     gameArr = getRandomArray(count);
 
     loadSong(0);
@@ -124,6 +128,9 @@ function toggle() {
     if (!toggled) {
         toggled = true;
         toggleLed(true);
+        let countCls = document.querySelector('.count');
+        if (count < 10) countCls.innerHTML = '0' + count;
+        else countCls.innerHTML = '' + count;
         addStartGameListener();
     } else {
         toggled = false;
