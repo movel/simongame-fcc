@@ -107,6 +107,8 @@ function addStartGameListener() {
 function removeStartGameListener() {
     start.removeEventListener('mousedown', startGame);
     count = 0;
+    let countCls = document.querySelector('.count');
+    countCls.innerHTML = '--';
 }
 
 function startGame() {
@@ -128,9 +130,7 @@ function toggle() {
     if (!toggled) {
         toggled = true;
         toggleLed(true);
-        let countCls = document.querySelector('.count');
-        if (count < 10) countCls.innerHTML = '0' + count;
-        else countCls.innerHTML = '' + count;
+
         addStartGameListener();
     } else {
         toggled = false;
