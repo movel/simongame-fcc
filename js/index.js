@@ -58,10 +58,13 @@ function loadSong(index) {
     snd[gameArr[index]].load();
     snd[gameArr[index]].play();
     setLightBkgColor(gameArr[index]);
-    // if needs delay
-    if (arguments[1] !== true) {
-        snd[gameArr[index]].addEventListener('ended', getNextAudio(index), false);
-    };
+    snd[gameArr[index]].addEventListener('ended', getNextAudio(index), false);
+}
+
+function loadSongBtn(index) {
+    snd[gameArr[index]].load();
+    snd[gameArr[index]].play();
+    setLightBkgColor(gameArr[index]);
 }
 
 function setLightBkgColor(index) {
@@ -69,35 +72,30 @@ function setLightBkgColor(index) {
     let idClass;
     if (index === 0) {
         idClass = document.getElementsByClassName('quarterCircleTopLeft');
+        console.log('index 0: ', index);
     }
     if (index === 1) {
         idClass = document.getElementsByClassName('quarterCircleTopRight');
+        console.log('index 1: ', index);
     }
     if (index === 2) {
         idClass = document.getElementsByClassName('quarterCircleBottomRight');
+        console.log('index 2: ', index);
     }
     if (index === 3) {
         idClass = document.getElementsByClassName('quarterCircleBottomLeft');
+        console.log('index 3: ', index);
     }
+
     idClass[0].classList.add(cls);
     setTimeout(() => idClass[0].classList.remove(cls), 500);
 }
 
 function buttonAddListener() {
-    id0.addEventListener('mousedown', () => loadSong(0, true));
-    id1.addEventListener('mousedown', () => loadSong(1, true));
-    id2.addEventListener('mousedown', () => loadSong(2, true));
-    id3.addEventListener('mousedown', () => loadSong(3, true));
-}
-
-function playAudio() {
-    arrAudio = getRandomArray(count);
-    let _player = new Audio();
-    _player.addEventListener('ended', getNextAudio);
-}
-
-function getRndSnd(length) {
-    getRandomArray(length);
+    id0.addEventListener('mousedown', () => loadSongBtn(0));
+    id1.addEventListener('mousedown', () => loadSongBtn(1));
+    id2.addEventListener('mousedown', () => loadSongBtn(2));
+    id3.addEventListener('mousedown', () => loadSongBtn(3));
 }
 
 function addStartGameListener() {
@@ -122,6 +120,7 @@ function startGame() {
     else countCls.innerHTML = '' + count;
     gameArr = getRandomArray(count);
 
+    console.log('startGame + gameArr: ', gameArr);
     loadSong(0);
 
 }
