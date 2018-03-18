@@ -44,13 +44,13 @@ snd.push(snd2);
 snd.push(snd3);
 snd.push(snd4);
 
-function getNextAudio(cnt) {
-    if (cnt < count - 1) {
+function getNextAudio(index) {
+    if (index < count - 1) {
         setTimeout(() => {
-            setLightBkgColor(gameArr[cnt]);
-            loadSong(cnt);
+            setLightBkgColor(gameArr[index]);
+            loadSong(index);
         }, 1000);
-        cnt++;
+        index++;
     };
 }
 
@@ -63,8 +63,26 @@ function loadSong(index) {
 
 function loadSongBtn(index) {
     snd[index].load();
-    snd[index].play();
+    fetchVideoAndPlay(snd[index].src);
+    // snd[index].play();
     setLightBkgColor(index);
+}
+
+function fetchVideoAndPlay(src) {
+    // https://developers.google.com/web/updates/2017/06/play-request-was-interrupted#error
+    fetch(src)
+        .then(response => response.blob())
+        .then(blob => {
+            audio.srcObject = blob;
+            return audio.play();
+        })
+        .then(_ => {
+            // Video playback started ;)
+        })
+        .catch(e => {
+            // Video playback failed ;(
+            console.log('ex: ', e);
+        })
 }
 
 function setLightBkgColor(index) {
