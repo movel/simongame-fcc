@@ -59,34 +59,33 @@ function loadSong(index) {
     audio.load();
     audio.play();
     setLightBkgColor(gameArr[index]);
-    if (!arguments[1]) audio.addEventListener('ended', getNextAudio(index), false);
+    audio.addEventListener('ended', getNextAudio(index), false);
 }
 
 function loadSongBtn(index) {
-    // snd[index].load();
-    // snd[index].play();
-    setLightBkgColor(index);
-
     let audio = snd[index];
     audio.load();
 
-    let playPromise = audio.play();
+    // OMException: The play() request was interrupted
+    // https://developers.google.com/web/updates/2017/06/play-request-was-interrupted#error
+    // 
 
+    let playPromise = audio.play();
 
     if (playPromise !== undefined) {
         playPromise.then(_ => {
-                // Автоматическое воспроизведение началось!
-                // Показать игровой интерфейс.
-                // Теперь мы можем безопасно приостанавливать видео ... 
+                // Automatic playback started!
+                // Show playing UI.
+                // We can now safely pause video...
                 audio.play();
-                audio.pause();
             })
             .catch(error => {
-                // Авто-игра была предотвращена
-                // Показать приостановленный пользовательский интерфейс.
-                console.log('error:', error);
+                // Auto-play was prevented
+                // Show paused UI.
             });
     }
+
+    setLightBkgColor(index);
 }
 
 function setLightBkgColor(index) {
