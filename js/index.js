@@ -55,34 +55,38 @@ function getNextAudio(index) {
 }
 
 function loadSong(index) {
-    snd[gameArr[index]].load();
-    snd[gameArr[index]].play();
+    let audio = snd[gameArr[index]];
+    audio.load();
+    audio.play();
     setLightBkgColor(gameArr[index]);
-    snd[gameArr[index]].addEventListener('ended', getNextAudio(index), false);
+    if (!arguments[1]) audio.addEventListener('ended', getNextAudio(index), false);
 }
 
 function loadSongBtn(index) {
-    snd[index].load();
-    fetchVideoAndPlay(snd[index].src);
+    // snd[index].load();
     // snd[index].play();
     setLightBkgColor(index);
-}
 
-function fetchVideoAndPlay(src) {
-    // https://developers.google.com/web/updates/2017/06/play-request-was-interrupted#error
-    fetch(src)
-        .then(response => response.blob())
-        .then(blob => {
-            audio.srcObject = blob;
-            return audio.play();
-        })
-        .then(_ => {
-            // Video playback started ;)
-        })
-        .catch(e => {
-            // Video playback failed ;(
-            console.log('ex: ', e);
-        })
+    let audio = snd[index];
+    audio.load();
+
+    let playPromise = audio.play();
+
+
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+                // Автоматическое воспроизведение началось!
+                // Показать игровой интерфейс.
+                // Теперь мы можем безопасно приостанавливать видео ... 
+                audio.play();
+                audio.pause();
+            })
+            .catch(error => {
+                // Авто-игра была предотвращена
+                // Показать приостановленный пользовательский интерфейс.
+                console.log('error:', error);
+            });
+    }
 }
 
 function setLightBkgColor(index) {
