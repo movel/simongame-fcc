@@ -22,6 +22,7 @@ slider_toggle.addEventListener('mousedown', toggle);
 let start = document.getElementById('start');
 
 let gameArr = new Array();
+let guess = 0;
 
 let id0 = document.getElementById('0');
 let id1 = document.getElementById('1');
@@ -63,6 +64,12 @@ function loadSong(index) {
 }
 
 function loadSongBtn(index) {
+
+    // if (index === 0) { id0.removeEventListener('mousedown', () => loadSongBtn(0)); }
+    // if (index === 1) { id1.removeEventListener('mousedown', () => loadSongBtn(1)); }
+    // if (index === 2) { id2.removeEventListener('mousedown', () => loadSongBtn(2)); }
+    // if (index === 3) { id3.removeEventListener('mousedown', () => loadSongBtn(3)); }
+
     let audio = snd[index];
     audio.load();
 
@@ -86,6 +93,21 @@ function loadSongBtn(index) {
     }
 
     setLightBkgColor(index);
+
+    console.log('guess:', index);
+    console.log('gameArr[index]', gameArr[guess]);
+
+    if (index === gameArr[guess]) {
+        if (guess === gameArr.length - 1) {
+            setTimeout(() => startGame(), 1000);
+
+        };
+        guess++;
+    } else {
+        resetCount();
+        guess = 0;
+    }
+
 }
 
 function setLightBkgColor(index) {
@@ -108,6 +130,12 @@ function setLightBkgColor(index) {
     setTimeout(() => idClass[0].classList.remove(cls), 500);
 }
 
+function resetCount() {
+    count = 0;
+    let countCls = document.querySelector('.count');
+    countCls.innerHTML = '--';
+}
+
 function buttonAddListener() {
     id0.addEventListener('mousedown', () => loadSongBtn(0));
     id1.addEventListener('mousedown', () => loadSongBtn(1));
@@ -121,23 +149,21 @@ function addStartGameListener() {
 
 function removeStartGameListener() {
     start.removeEventListener('mousedown', startGame);
-    count = 0;
-    let countCls = document.querySelector('.count');
-    countCls.innerHTML = '--';
+    resetCount();
 }
 
 function startGame() {
     // Game is Starting!!!
-    buttonAddListener();
     let gameOver = false;
     count++;
+    guess = 0;
 
     let countCls = document.querySelector('.count');
     if (count < 10) countCls.innerHTML = '0' + count;
     else countCls.innerHTML = '' + count;
+
     gameArr = getRandomArray(count);
 
-    // console.log('startGame + gameArr: ', gameArr);
     loadSong(0);
 
 }
@@ -146,7 +172,7 @@ function toggle() {
     if (!toggled) {
         toggled = true;
         toggleLed(true);
-
+        buttonAddListener();
         addStartGameListener();
     } else {
         toggled = false;
