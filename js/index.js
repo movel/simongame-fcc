@@ -20,6 +20,8 @@ let slider_toggle = document.querySelector(selector);
 slider_toggle.addEventListener('mousedown', toggle);
 
 let start = document.getElementById('start');
+let strict = document.getElementById('mode');
+let strictMode = false;
 
 let gameArr = new Array();
 let guess = 0;
@@ -94,8 +96,8 @@ function loadSongBtn(index) {
 
     setLightBkgColor(index);
 
-    console.log('guess:', index);
-    console.log('gameArr[index]', gameArr[guess]);
+    // console.log('guess:', index);
+    // console.log('gameArr[index]', gameArr[guess]);
 
     if (index === gameArr[guess]) {
         if (guess === gameArr.length - 1) {
@@ -152,6 +154,30 @@ function removeStartGameListener() {
     resetCount();
 }
 
+function addModeGameListener() {
+    strict.addEventListener('mousedown', gameMode);
+}
+
+function removeModeGameListener() {
+    strict.removeEventListener('mousedown', gameMode);
+}
+
+function gameMode() {
+    if (!strictMode) {
+        strictMode = true;
+    } else {
+        strictMode = false;
+    }
+    strictModeLed(strictMode);
+}
+
+function strictModeLed(on) {
+    let countClass = document.getElementsByClassName('led');
+    let cls = "led-on";
+    if (!on) countClass[0].classList.remove(cls);
+    else countClass[0].classList.add(cls);
+}
+
 function startGame() {
     // Game is Starting!!!
     let gameOver = false;
@@ -171,14 +197,15 @@ function startGame() {
 function toggle() {
     if (!toggled) {
         toggled = true;
-        toggleLed(true);
         buttonAddListener();
         addStartGameListener();
+        addModeGameListener();
     } else {
         toggled = false;
-        toggleLed(false);
         removeStartGameListener();
+        removeModeGameListener();
     }
+    toggleLed(toggled);
 }
 
 function toggleLed(on) {

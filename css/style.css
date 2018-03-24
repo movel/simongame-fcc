@@ -189,12 +189,13 @@ html {
     left: 0;
     right: 0;
     margin: auto;
-    border: 2px solid #222;
+    border: 1px solid #222;
     top: -18px;
 }
 
 .led-on {
     background-color: #DC0D29;
+    /* border: 2px solid #DC0D29; */
 }
 
 .led-off {
