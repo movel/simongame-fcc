@@ -100,8 +100,11 @@ function loadSongBtn(index) {
 
     if (index === gameArr[guess]) {
         if (guess === gameArr.length - 1) {
-            setTimeout(() => startGame(), 1000);
-
+            if (guess === 20) {
+                alert('VICTORY !!!');
+                resetCount();
+                guess = 0;
+            } else setTimeout(() => startGame(), 1000);
         };
         guess++;
     } else {
