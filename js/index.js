@@ -21,6 +21,8 @@ slider_toggle.addEventListener('mousedown', toggle);
 
 let start = document.getElementById('start');
 let strict = document.getElementById('mode');
+let countCls = document.querySelector('.count');
+
 let strictMode = false;
 
 let gameArr = new Array();
@@ -96,9 +98,6 @@ function loadSongBtn(index) {
 
     setLightBkgColor(index);
 
-    // console.log('guess:', index);
-    // console.log('gameArr[index]', gameArr[guess]);
-
     if (index === gameArr[guess]) {
         if (guess === gameArr.length - 1) {
             setTimeout(() => startGame(), 1000);
@@ -106,8 +105,11 @@ function loadSongBtn(index) {
         };
         guess++;
     } else {
-        resetCount();
-        guess = 0;
+        if (startGame) resumeCount();
+        else {
+            resetCount();
+            guess = 0;
+        }
     }
 
 }
@@ -134,8 +136,17 @@ function setLightBkgColor(index) {
 
 function resetCount() {
     count = 0;
-    let countCls = document.querySelector('.count');
     countCls.innerHTML = '--';
+}
+
+function resumeCount() {
+    setTimeout(() => countCls.innerHTML = '!!', 500);
+    setTimeout(() => resumeCountHint(), 1000);
+}
+
+function resumeCountHint() {
+    if (count < 10) countCls.innerHTML = '0' + count;
+    else countCls.innerHTML = '' + count;
 }
 
 function buttonAddListener() {
@@ -172,10 +183,10 @@ function gameMode() {
 }
 
 function strictModeLed(on) {
-    let countClass = document.getElementsByClassName('led');
+    let ledClass = document.getElementsByClassName('led');
     let cls = "led-on";
-    if (!on) countClass[0].classList.remove(cls);
-    else countClass[0].classList.add(cls);
+    if (!on) ledClass[0].classList.remove(cls);
+    else ledClass[0].classList.add(cls);
 }
 
 function startGame() {
@@ -184,10 +195,7 @@ function startGame() {
     count++;
     guess = 0;
 
-    let countCls = document.querySelector('.count');
-    if (count < 10) countCls.innerHTML = '0' + count;
-    else countCls.innerHTML = '' + count;
-
+    resumeCountHint();
     gameArr = getRandomArray(count);
 
     loadSong(0);
